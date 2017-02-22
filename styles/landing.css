@@ -38,6 +38,16 @@ body.landing {
     position: relative;
     padding: 2rem;
     text-align: center;
+    opacity: 0;                     /* when page loads this element will not be visible. */
+    -webkit-transform: scaleX(0.9) translateY(3rem); /* scale the element to 90% of its width. Move element 3rem down its normal position. */
+    -moz-transform: scaleX(0.9) translateY(3rem);
+    transform: scaleX(0.9) translateY(3rem);
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    -webkit-transition-delay: 0.2s;
+    -moz-transition-delay: 0.2s;
+    transition-delay: 0.2s;
 }
 
 .point .point-title {
