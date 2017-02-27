@@ -30,6 +30,20 @@ var albumMarconi = {
     ]
 };
 
+var albumU2 = {
+    title: 'The Joshua Tree',
+    artist: 'U2',
+    label: 'Island',
+    year: '1987',
+    albumArtUrl: 'assets/images/album_covers/11.png',
+    songs: [
+        {title: 'With or Without You', duration: '3:15'},
+        {title: 'I Still Haven\'t Found What I\'m Looking For', duration: '5:10'},
+        {title: 'Where The Streets Have No Name', duration: '2:23'},
+        {title: 'In God\'s Country', duration: '3:05'},
+        {title: 'One Tree Hill', duration: '4:15'},
+    ]
+};
 
 var createSongRow = function (songNumber, songName, songLength) {
     var template =
@@ -44,13 +58,14 @@ var createSongRow = function (songNumber, songName, songLength) {
 };
 
 
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+
 
 var setCurrentAlbum = function(album) {
     //#1
     var albumTitle = document.getElementsByClassName('album-view-title')[0];
     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-    var albumImage = document.getElementsByClassName('album-cover-art')[0];
     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
 
@@ -73,4 +88,14 @@ var setCurrentAlbum = function(album) {
 window.onload = function () {
     setCurrentAlbum(albumPicasso);
     
+    var albums = [albumPicasso, albumMarconi, albumU2,];
+    var i = 1;
+    
+    albumImage.addEventListener("click", function (event) {
+        setCurrentAlbum(albums[i]);
+        i++;
+        if(i === albums.length) {
+            i = 0;
+        }
+    });
 };
