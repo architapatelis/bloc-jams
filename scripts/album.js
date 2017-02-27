@@ -1,4 +1,4 @@
-//Example Album 
+//Store each ablum as an object
 var albumPicasso = {
     title: 'The Colors',
     artist: 'Pablo Picasso',
@@ -34,7 +34,7 @@ var albumMarconi = {
 var createSongRow = function (songNumber, songName, songLength) {
     var template =
         '<tr class="album-view-song-item">'
-    +   '   <td class="song-item-number">' + songNumber + '</td>'
+    + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
     +   '   <td class="song-item-title">' + songName + '</td>'
     +   '   <td class="song-item-duration">' + songLength + '</td>'
     +   '</tr>'
@@ -68,9 +68,38 @@ var setCurrentAlbum = function(album) {
         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
     }
 };
+//Elements we'll be adding Listners to 
 
+// #1 table element 
+var songListContainer = document.getElementsByClassName('album-view-song-list')[0]; 
+
+// #2 <tr> element
+var songRows = document.getElementsByClassName('album-view-song-item');
+
+// substitute the play button for the song number
+var playButtonTemplate = '<a class="album-song-button"><span class = "ion-play"></span></a>';
 
 window.onload = function () {
     setCurrentAlbum(albumPicasso);
     
+    // use event delegation to track the mouse's position. moused-over elements will fire an event that eventually registers with the table's (parent element) event listener.
+    songListContainer.addEventListener('mouseover', function (event) {
+        //The target property on the event object stores the DOM element <td> where the event occurred. console.log(event.target);
+        
+        // only target individual song rows <tr> during event delegation
+        if (event.target.parentElement.className === 'album-view-song-item') {
+            // Change the content from the number to the play button's HTML
+            event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+        }  
+    });
+    
+    // To revert the button back to the number
+    // select an array of every table row <tr> and loop over each to add its event listener:
+    for (var i = 0; i < songRows.length; i++) {
+        songRows[i].addEventListener('mouseleave', function (event) {
+            
+            //Selects first child element, which is the song-item-number element
+            this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+        });
+    }
 };
