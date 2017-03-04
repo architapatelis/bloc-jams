@@ -4,6 +4,7 @@ body.album {
     background-attachment: fixed;
     background-position: center center;
     background-size: cover;
+    padding-bottom: 200px; /* add padding to bottom of album page to accomodate the fixed .player-bar position. So user can scroll all the way to the bottom on album page and still see all the content without the player bar blocking it */
 
 }
 
