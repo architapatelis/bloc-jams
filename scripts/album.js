@@ -42,8 +42,7 @@ var createSongRow = function (songNumber, songName, songLength) {
             // revert the HTML of the element to the  playerBarPlayButton template when the song is paused:
             $('.main-controls .play-pause').html(playerBarPlayButton);
             // set values to null since no song is currently playing.
-            currentlyPlayingSongNumber = null;
-            currentSongFromAlbum = null;
+            setSong(null);
         }
     };
     
