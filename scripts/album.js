@@ -1,7 +1,31 @@
+// assign the current song
 var setSong = function (songNumber) {
+    if (currentSoundFile) {
+        currentSoundFile.stop();
+    }
+    
     currentlyPlayingSongNumber = parseInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber -1];
+    
+    // wrap an audio file in the buzz.sound constructor fuction.
+    // using 'new' assign/create a new Buzz object
+    currentSoundFile = new buzz.sound(currentSongFromAlbum.audioUrl, {
+        
+        // array of strings with acceptable audio formats. 
+        formats: [ 'mp3' ],
+        //want mp#s loaded as soon as the page loads. 
+        preload: true
+    });
+    
+    setVolume(currentVolume);
 };
+
+var setVolume = function(volume) {
+    if (currentSoundFile) {
+        currentSoundFile.setVolume(volume);
+    }
+};
+
 
 var getSongNumberCell = function (number) {
     return $('.song-item-number[data-song-number="' + number + '"]');
@@ -34,15 +58,23 @@ var createSongRow = function (songNumber, songName, songLength) {
             // currently playing song value changes from null to the song number we clicked on.
             // set index value of current song from album
             setSong(songNumber);
+            currentSoundFile.play();
             updatePlayerBarSong();
             
         } else if (currentlyPlayingSongNumber === songNumber) {
-            // Switch from Pause -> Play button to pause currently playing song.
-            $(this).html(playButtonTemplate);
-            // revert the HTML of the element to the  playerBarPlayButton template when the song is paused:
-            $('.main-controls .play-pause').html(playerBarPlayButton);
-            // set values to null since no song is currently playing.
-            setSong(null);
+            // when the user clicks the pause button for the same song that is playing.
+            //if currently playing song is already paused, when we resume it do this.
+            if (currentSoundFile.isPaused()) {
+                $(this).html(pauseButtonTemplate);
+                $('.main-controls .play-pause').html(playerBarPauseButton);
+                currentSoundFile.play();
+            } // when we pause the currently playing song
+            else {
+                $(this).html(playButtonTemplate);
+                $('.main-controls .play-pause').html(playerBarPlayButton);
+                currentSoundFile.pause();
+            }
+
         }
     };
     
@@ -153,6 +185,9 @@ var nextSong = function () {
     // Set a new current song
     setSong(currentSongIndex + 1);
     
+    //to play a song when we click next
+    currentSoundFile.play();
+    
     // Update the Player Bar information
     updatePlayerBarSong();
     
@@ -183,6 +218,9 @@ var previousSong = function() {
     
     // Set a new current song
     setSong(currentSongIndex + 1);
+    
+    // play a song when we click previous
+    currentSoundFile.play();
     
     // Update the Player Bar information
     updatePlayerBarSong();
@@ -217,6 +255,12 @@ var currentlyPlayingSongNumber = null;
 
 // album info: store the currently playing song object from the songs array (from album object)
 var currentSongFromAlbum = null;
+
+// store the sound object in a variable when we set a new current song. Initially set to null
+var currentSoundFile = null;
+
+//set song volume (Buzz sclae is 0-100)
+var currentVolume = 80;
 
 // jQuery selector for pervious Button
 var $previousButton = $('.main-controls .previous');
