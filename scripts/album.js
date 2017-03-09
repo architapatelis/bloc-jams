@@ -19,6 +19,8 @@ var setSong = function (songNumber) {
     
     setVolume(currentVolume);
 };
+
+
 // seek to parts of a song, clicking a new location should seek to th corresponding position on seek-bar
 var seek = function(time) {
     // if song is playing
@@ -39,6 +41,7 @@ var setVolume = function(volume) {
 var getSongNumberCell = function (number) {
     return $('.song-item-number[data-song-number="' + number + '"]');
 };
+
 
 var createSongRow = function (songNumber, songName, songLength) {
     var template =
@@ -93,7 +96,6 @@ var createSongRow = function (songNumber, songName, songLength) {
                 $('.main-controls .play-pause').html(playerBarPlayButton);
                 currentSoundFile.pause();
             }
-
         }
     };
     
@@ -166,6 +168,7 @@ var setCurrentAlbum = function(album) {
     }
 };
 
+
 // update time on seek bar
 var updateSeekBarWhileSongPlays = function() {
     //if song is playing
@@ -179,7 +182,6 @@ var updateSeekBarWhileSongPlays = function() {
             updateSeekPercentage($seekBar, seekBarFillRatio);
         });
     }
-    
 };
 
 
@@ -200,6 +202,7 @@ var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
     $seekBar.find('.fill').width(percentageString);
     $seekBar.find('.thumb').css({left: percentageString});
 };
+
 
 //  match the currently playing song's object with its corresponding index in the songs array
 var trackIndex = function(album, song) {
@@ -243,7 +246,7 @@ var setupSeekBars = function() {
         // parent() tells us if it was the song seek control thumb or the volume control thumb
         var $seekBar = $(this).parent();
         
-        
+
         //attach mousemove to $(document) to make sure that we can drag the thumb after mousing down, even when the mouse leaves the seek bar. Better user experience
         // event.nameSpace makes the event more specific by attaching a string to the event after a period
         $(document).bind('mousemove.thumb', function(event){
@@ -257,18 +260,16 @@ var setupSeekBars = function() {
                 setVolume(seekBarFillRatio);
             }
             
-            
             updateSeekPercentage($seekBar, seekBarFillRatio);
         });
+        
         
         //we bind the mouseup event with a .thumb namespace.
         $(document).bind('mouseup.thumb', function() {
             $(document).unbind('mousemove.thumb');
             $(document).unbind('mouseup.thumb');
-        }); 
-        
+        });   
     });
-    
 };
 
 
@@ -283,6 +284,7 @@ var updatePlayerBarSong = function () {
     $('.main-controls .play-pause').html(playerBarPauseButton);
     
 };
+
 
 var nextSong = function () {
     //get previous song
@@ -319,6 +321,7 @@ var nextSong = function () {
     $lastSongNumberCell.html(lastSongNumber);
     
 };
+
 
 var previousSong = function() {
     // get previous song
@@ -366,7 +369,6 @@ var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause">
 var playerBarPlayButton = '<span class="ion-play"></span>';
 
 var playerBarPauseButton = '<span class="ion-pause"></span>';
-
 
 
 // album info: when no album is playing the value is set to null
