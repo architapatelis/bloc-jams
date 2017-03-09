@@ -79,7 +79,7 @@ var createSongRow = function (songNumber, songName, songLength) {
             var $volumeFill = $('.volume .fill');
             var $volumeThumb = $('.volume .thumb');
             $volumeFill.width(currentVolume + '%');
-            eThumb.css({left: currentVolume + '%'});
+            $volumeThumb.css({left: currentVolume + '%'});
             
         } else if (currentlyPlayingSongNumber === songNumber) {
             // when the user clicks the pause button for the same song that is playing.
