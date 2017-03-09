@@ -359,6 +359,21 @@ var previousSong = function() {
     
 };
 
+// checkpoint20 assignment 2 
+var togglePlayFromPlayerBar = function () {
+    
+    var $songNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+    
+    if(currentSoundFile.isPaused()) {
+        $songNumberCell.html(pauseButtonTemplate);
+        $playerBarPlayPause.html(playerBarPauseButton);
+        currentSoundFile.play();
+    } else if (currentSoundFile) {
+        $songNumberCell.html(playButtonTemplate);
+        $playerBarPlayPause.html(playerBarPlayButton);
+        currentSoundFile.pause();
+    }
+};
 
 // play button for the song number
 var playButtonTemplate = '<a class="album-song-button"><span class = "ion-play"></span></a>';
@@ -392,6 +407,10 @@ var $previousButton = $('.main-controls .previous');
 // jQuery selector for next Button
 var $nextButton = $('.main-controls .next');
 
+// checkpoint20 assignment #1.1
+//jQuery selector for paly-pause button on bar
+var $playerBarPlayPause = $('.main-controls .play-pause')
+
 
 $(document).ready(function () {
     setCurrentAlbum(albumPicasso);
@@ -400,4 +419,8 @@ $(document).ready(function () {
     // jQuery click event handlers for previous song and next song.
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
+    
+    // checkpoint20 assignment #1.2
+    // add click event 
+    $playerBarPlayPause.click(togglePlayFromPlayerBar);
 });
