@@ -179,12 +179,11 @@ var updateSeekBarWhileSongPlays = function() {
             var seekBarFillRatio = this.getTime() / this.getDuration();
             var $seekBar = $('.seek-control .seek-bar');
             
-            var currentTime = this.getTime();
+            var currentTime = currentSoundFile.getTime();
             setCurrentTimeInPlayerBar(currentTime);
             
-            
-            
-            
+            var totalTime = currentSoundFile.getDuration();
+             
             updateSeekPercentage($seekBar, seekBarFillRatio);
         });
     }
@@ -286,7 +285,9 @@ var updatePlayerBarSong = function () {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     
-    setTotalTimeInPlayerBar();
+    var totalTime = currentSoundFile.getDuration();
+    
+    setTotalTimeInPlayerBar(totalTime);
     
     // updates the HTML of the player bar play/pause button to the content of playerBarPauseButton
     $('.main-controls .play-pause').html(playerBarPauseButton);
@@ -370,13 +371,13 @@ var previousSong = function() {
 
 var setCurrentTimeInPlayerBar = function (currentTime) {
     var startTime = filterTimeCode(currentTime);
-    $('seek-control current-time').text(startTime);
+    $('.seek-control .current-time').text(startTime);
 };
 
 var setTotalTimeInPlayerBar = function (totalTime) {
-    var totalTime = currentSoundFile.getDuration();
     var endTime = filterTimeCode(totalTime);
-    $('seek-control total-time').text(endTime);
+    $('.seek-control .total-time').text(endTime);
+
 };
 
 var filterTimeCode = function (timeInSeconds) {
@@ -411,6 +412,8 @@ var currentSoundFile = null;
 
 //set song volume (Buzz sclae is 0-100)
 var currentVolume = 80;
+
+
 
 // jQuery selector for pervious Button
 var $previousButton = $('.main-controls .previous');
