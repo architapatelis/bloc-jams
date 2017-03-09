@@ -285,7 +285,7 @@ var updatePlayerBarSong = function () {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     
-    var totalTime = currentSoundFile.getDuration();
+    var totalTime = currentSongFromAlbum.duration;
     
     setTotalTimeInPlayerBar(totalTime);
     
