@@ -311,7 +311,7 @@ var nextSong = function () {
     updateSeekBarWhileSongPlays();
     
     // Update the Player Bar information
-    //updatePlayerBarSong();
+    updatePlayerBarSong();
     
     var lastSongNumber = getLastSongNumber(currentSongIndex);
     var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber); 
