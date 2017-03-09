@@ -42,7 +42,7 @@ var getSongNumberCell = function (number) {
     return $('.song-item-number[data-song-number="' + number + '"]');
 };
 
-
+// checkpoint21-assignment display songLength as X:XX in table
 var createSongRow = function (songNumber, songName, songLength) {
     var template =
         '<tr class="album-view-song-item">'
@@ -179,10 +179,9 @@ var updateSeekBarWhileSongPlays = function() {
             var seekBarFillRatio = this.getTime() / this.getDuration();
             var $seekBar = $('.seek-control .seek-bar');
             
+            //checkpoint21-assignment set current time under seek bar
             var currentTime = currentSoundFile.getTime();
             setCurrentTimeInPlayerBar(currentTime);
-            
-            var totalTime = currentSoundFile.getDuration();
              
             updateSeekPercentage($seekBar, seekBarFillRatio);
         });
@@ -285,8 +284,8 @@ var updatePlayerBarSong = function () {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     
+    // checkpoint21-assignment add total time under seek bar
     var totalTime = currentSongFromAlbum.duration;
-    
     setTotalTimeInPlayerBar(totalTime);
     
     // updates the HTML of the player bar play/pause button to the content of playerBarPauseButton
@@ -368,23 +367,29 @@ var previousSong = function() {
     
 };
 
-
+//checkpoint21-assignment
 var setCurrentTimeInPlayerBar = function (currentTime) {
     var startTime = filterTimeCode(currentTime);
     $('.seek-control .current-time').text(startTime);
 };
 
+//checkpoint21-assignment
 var setTotalTimeInPlayerBar = function (totalTime) {
     var endTime = filterTimeCode(totalTime);
     $('.seek-control .total-time').text(endTime);
 
 };
 
+//checkpoint21-assignment
 var filterTimeCode = function (timeInSeconds) {
     var totalSeconds = parseFloat(timeInSeconds);
     var minutes = Math.floor(totalSeconds/60);
     var seconds = Math.floor(totalSeconds - (minutes * 60));
-    return minutes + ':' + seconds;
+    if (seconds < 10) {
+        return minutes + ':' + 0 + seconds;
+    } else {
+        return minutes + ':' + seconds;
+    }
 };
 
 // play button for the song number
