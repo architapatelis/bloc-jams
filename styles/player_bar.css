@@ -104,7 +104,7 @@
 
 .seek-bar .fill { /* static element, appears as line */
     background-color: white;
-    width: 36%;
+    width: 0%;
     height: 0.25rem;
     border-radius: 2px;
 }
@@ -114,7 +114,7 @@
     height: 0.5rem;
     width: 0.5rem;
     background-color: white;
-    left: 36%;
+    left: 0%;
     top: 50%;
     /* negative values acount for the size increase and hold the element's position in place, so that the change in size doesn't adjust the position of other elements */
     margin-left: -0.25rem;
