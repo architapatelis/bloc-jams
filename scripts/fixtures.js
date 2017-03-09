@@ -7,11 +7,11 @@ var albumPicasso = {
     albumArtUrl: 'assets/images/album_covers/01.png',
     // Note that we don't add the .mp3 extension to the end of the audio files. specify the file type when we use the files with Buzz
     songs: [
-        {title: 'Blue', duration: '4:26', audioUrl: 'assets/music/blue'},
-        {title: 'Green', duration: '3:14', audioUrl: 'assets/music/green'},
-        {title: 'Red', duration: '5:01', audioUrl: 'assets/music/red'},
-        {title: 'Pink', duration: '3:21', audioUrl: 'assets/music/pink'},
-        {title: 'Magenta', duration: '2:15', audioUrl: 'assets/music/magenta'},
+        {title: 'Blue', duration: 161.71, audioUrl: 'assets/music/blue'},
+        {title: 'Green', duration: 103.96, audioUrl: 'assets/music/green'},
+        {title: 'Red', duration: 268.45, audioUrl: 'assets/music/red'},
+        {title: 'Pink', duration: 153.14, audioUrl: 'assets/music/pink'},
+        {title: 'Magenta', duration: 374.22, audioUrl: 'assets/music/magenta'},
     ]
 };
 
