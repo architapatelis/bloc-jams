@@ -1,0 +1,1 @@
+Bloc Jams is a digital music player like Spotify. HTML is used to build the backbone of the application’s layout, styling and responsiveness is added using CSS, and interactivity is implemented with native JavaScript.
